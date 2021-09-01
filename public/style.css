@@ -122,6 +122,15 @@ video {
   border: none;
 }
 
+#chat_message {
+  height: 50px;
+  flex: 1;
+  font-size: 1rem;
+  border-radius: 5px;
+  padding-left: 20px;
+  border: none;
+}
+
 .messages {
   display: flex;
   flex-direction: column;
