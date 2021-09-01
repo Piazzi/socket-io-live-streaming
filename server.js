@@ -12,6 +12,7 @@ const io = require("socket.io")(server, {
     origin: '*'
   }
 });
+
 const { ExpressPeerServer } = require("peer");
 const peerServer = ExpressPeerServer(server, {
   debug: true,
@@ -46,4 +47,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(process.env.PORT || 3030);
+server.listen(3030, () => {
+    console.log('listening on *:3030');
+  });

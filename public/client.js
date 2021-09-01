@@ -21,11 +21,14 @@ showChat.addEventListener("click", () => {
 
 const user = prompt("Enter your name");
 
+/*
 var peer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
   port: "443",
-});
+});*/
+peer = new Peer({host:'peerjs-server.herokuapp.com', secure:true, port:443})
+
 
 let myVideoStream;
 navigator.mediaDevices
@@ -74,6 +77,7 @@ let text = document.querySelector("#chat_message");
 let send = document.getElementById("send");
 let messages = document.querySelector(".messages");
 
+// send user message
 send.addEventListener("click", (e) => {
   if (text.value.length !== 0) {
     socket.emit("message", text.value);
@@ -91,6 +95,8 @@ text.addEventListener("keydown", (e) => {
 const inviteButton = document.querySelector("#inviteButton");
 const muteButton = document.querySelector("#muteButton");
 const stopVideo = document.querySelector("#stopVideo");
+
+// disable mic
 muteButton.addEventListener("click", () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
   if (enabled) {
@@ -106,6 +112,7 @@ muteButton.addEventListener("click", () => {
   }
 });
 
+// disable camera
 stopVideo.addEventListener("click", () => {
   const enabled = myVideoStream.getVideoTracks()[0].enabled;
   if (enabled) {
@@ -121,6 +128,7 @@ stopVideo.addEventListener("click", () => {
   }
 });
 
+// get room URL
 inviteButton.addEventListener("click", (e) => {
   prompt(
     "Copy this link and send it to people you want to meet with",
@@ -128,6 +136,7 @@ inviteButton.addEventListener("click", (e) => {
   );
 });
 
+// create message 
 socket.on("createMessage", (message, userName) => {
   messages.innerHTML =
     messages.innerHTML +
