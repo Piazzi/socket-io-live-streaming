@@ -27,6 +27,7 @@ var peer = new Peer(undefined, {
   host: "/",
   port: "443",
 });*/
+
 peer = new Peer({host:'peerjs-server.herokuapp.com', secure:true, port:443})
 
 

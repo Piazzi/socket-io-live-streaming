@@ -7,11 +7,8 @@ const { v4: uuidv4 } = require("uuid");
 
 // setup the view
 app.set("view engine", "ejs");
-const io = require("socket.io")(server, {
-  cors: {
-    origin: '*'
-  }
-});
+
+const io = require('socket.io')(server);
 
 const { ExpressPeerServer } = require("peer");
 const peerServer = ExpressPeerServer(server, {
@@ -40,7 +37,7 @@ app.get("/:room", (req, res) => {
 io.on("connection", (socket) => {
   socket.on("join-room", (roomId, userId, userName) => {
     socket.join(roomId);
-    socket.to(roomId).broadcast.emit("user-connected", userId);
+    socket.to(roomId).emit("user-connected", userId);
     socket.on("message", (message) => {
       io.to(roomId).emit("createMessage", message, userName);
     });
