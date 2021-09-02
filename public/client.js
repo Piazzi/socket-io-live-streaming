@@ -86,6 +86,7 @@ send.addEventListener("click", (e) => {
   }
 });
 
+// when the user stars digiting 
 text.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && text.value.length !== 0) {
     socket.emit("message", text.value);
